@@ -26,3 +26,5 @@ will set initial values for width and height. will be called automaticaly.
 ## Constant exports
 
 ### REDUCER
+
+### GET_SIZE (default)
