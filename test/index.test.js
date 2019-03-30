@@ -10,11 +10,6 @@ describe('dispatch', () => {
     assert.equal(height, state.height);
     done();
   }
-  function handleUnsetTest(done) {
-    const state = store.getState()[REDUCER].get(GET_SIZE)
-    assert.equal(typeof state === 'undefined', true);
-    done();
-  }
   beforeEach(() => {
     function Window() {
       this.testAdd = 0;
