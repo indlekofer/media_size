@@ -1,7 +1,8 @@
 ## [Unreleased]
 
 * readme default added  
-* remove unused testfunction  
+* removed unused testfunction  
+* added eslint
 
 ## 1.0.0 (2019-03-30)
 
