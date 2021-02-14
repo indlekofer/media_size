@@ -1,6 +1,6 @@
 import assert from 'assert';
 import store from '@indlekofer/redux-store';
-import { GET_SIZE, REDUCER, config, setup, unset } from '../src/index';
+import { GET_SIZE, REDUCER, config, setup, unset, isRetina } from '../src/index';
 
 describe('dispatch', () => {
   var unsubscribe;
@@ -25,14 +25,9 @@ describe('dispatch', () => {
   afterEach(() => {
     unsubscribe();
   });
-  
-  it('check config force', (done) => {
-    unsubscribe = store.subscribe(handleChangeTest.bind(null, done, 1000, 1500));
-    config(1000, 1500, true);
-  });
   it('check config', (done) => {
     unsubscribe = store.subscribe(handleChangeTest.bind(null, done, 1111, 2222));
-    config(1111, 2222);
+    config();
   });
   it('check setup', () => {
     setup();
@@ -49,5 +44,29 @@ describe('dispatch', () => {
     unset();
     assert.equal(typeof window === 'undefined', true);
   });
+  it('check isRetina pixel ratio', () => {
+    global.window = {
+      devicePixelRatio: 1.5
+    };
+    assert.equal(isRetina(), true);
+  });
+  it('check isRetina normal pixel ratio', () => {
+    global.window = {
+      devicePixelRatio: 1
+    };
+    assert.equal(isRetina(), false);
+  });
+  it('check isRetina empty window object', () => {
+    global.window = {};
+    assert.equal(isRetina(), false);
+  });
+  it('check isRetina matchMedia', () => {
+    global.window = {
+      devicePixelRatio: 1,
+      matchMedia: function() { return { matches: true } }
+    };
+    assert.equal(isRetina(), true);
+  });
+
 });
 
